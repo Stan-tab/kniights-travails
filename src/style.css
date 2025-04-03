@@ -1,0 +1,42 @@
+:root{
+	background-color: rgb(11, 29, 57);
+	text-align: center;
+}
+
+.board {
+	width: calc(300px + 20vw);
+	height: calc(300px + 20vw);
+	margin: 0 auto;
+	background-color: beige;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+}
+
+a{
+	color: rgb(59, 157, 233);
+	text-decoration: none;
+}
+
+p{
+	color: white;
+	font-size: 2rem;
+}
+
+.black {
+	background-color: rgb(57, 21, 5);
+}
+
+.sub {
+	position: absolute;
+	left: 40%;
+	background-color: black;
+	z-index: 1;
+	p {
+		background-color: rgb(73, 70, 70);
+		margin: 0;
+		margin-bottom: 1px;
+		height: fit-content;
+		width: 6rem;
+		font-size: 15px;
+	}
+}

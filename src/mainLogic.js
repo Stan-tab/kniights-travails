@@ -128,7 +128,3 @@ export default class move {
 		return this.way;
 	}
 }
-
-const hi = new move([0, 0], [1, 0]);
-console.log(hi.way);
-console.log(hi.findWay([5,5], [6,6]));
