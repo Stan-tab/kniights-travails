@@ -1,8 +1,8 @@
 import moveTo from './mainLogic.js';
 import './style.css';
-import horse from "../assets/horse.svg"
+import horse from '../assets/horse.svg';
 
-const horseImg = document.createElement("img")
+const horseImg = document.createElement('img');
 horseImg.src = horse;
 
 const way = new moveTo();
@@ -29,8 +29,8 @@ class DOMmanipulate {
 	redish = null;
 
 	constructor() {
-		this.redish = document.createElement("div");
-		this.redish.classList = "redish";
+		this.redish = document.createElement('div');
+		this.redish.classList = 'redish';
 
 		const subMenu = document.createElement('div');
 		const paras = [
@@ -58,25 +58,47 @@ class DOMmanipulate {
 		}
 	}
 
-	paraSet (arr) {
-		arr[0].addEventListener("click", (e) => {
+	paraSet(arr) {
+		arr[0].addEventListener('click', (e) => {
 			const element = e.target.parentNode.parentNode;
-			element.appendChild(horseImg)
-			this.initial = [+element.getAttribute("x"), +element.getAttribute("y")];
-			if(this.final) {
-				console.log(way.findWay(this.initial, this.final))
-				this.final = this.initial = null;
+			element.appendChild(horseImg);
+			this.initial = [
+				+element.getAttribute('x'),
+				+element.getAttribute('y')
+			];
+			if (this.final) {
+				console.log(way.findWay(this.initial, this.final));
+				this.initial = this.final;
+				this.final = null;
 			}
-		})
-		arr[1].addEventListener("click", (e) => {
+		});
+		arr[1].addEventListener('click', (e) => {
 			const element = e.target.parentNode.parentNode;
-			element.appendChild(this.redish)
-			this.final = [+element.getAttribute("x"), +element.getAttribute("y")]
-			if(this.initial) {
-				console.log(way.findWay(this.initial, this.final))
-				this.final = this.initial = null;
+			element.appendChild(this.redish);
+			this.final = [
+				+element.getAttribute('x'),
+				+element.getAttribute('y')
+			];
+			if (this.initial) {
+				this.goTo(way.findWay(this.initial, this.final));
+				this.initial = this.final;
+				this.final = null;
 			}
-		})
+		});
+	}
+
+	async goTo(arr) {
+		const delay = (delayInms) => {
+			return new Promise((resolve) => setTimeout(resolve, delayInms));
+		};
+
+		for (let i = 1; i < arr.length; i++) {
+			const el = document.querySelector(
+				`div[x='${arr[i][0]}'][y='${arr[i][1]}']`
+			);
+			await delay(700);
+			el.appendChild(horseImg);
+		}
 	}
 }
 
